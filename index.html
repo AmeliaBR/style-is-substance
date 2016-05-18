@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Style Is Substance</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <style media="all">
+        h1, h2, h3, header, footer, p {
+            text-align: center;
+        }    
+        p {
+            font-style: italic;
+        }
+        li {
+            margin-bottom: 0.5em;
+        }
+        li li {
+            margin-bottom: 0.1em;
+        }
+        ul, ol {
+            margin: 0.25em 0;
+        }
+        header li, footer li {
+            display: block;
+        }
+        header li li, footer li li{
+            font-size: inherit;
+            margin: 0.5em auto;
+        }
+        header ul, footer ul {
+            display: block;
+            padding: 0;
+        }
+        footer, section:not(.multi-slide) {
+            position: relative;
+            counter-increment: slide;
+        }
+        footer::before, section:not(.multi-slide)::before {
+            content: counter(slide);
+            
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.5em;
+            height: 1em;
+            width: 1em;
+            color: gray;
+        }
+    </style>
+    <style media="print">
+        header, section, footer {
+            border-bottom: double dimgray 5px;
+            padding: 1em 0;
+            break-inside: avoid;
+        }
+        section.multi-slide section {
+            border-bottom: solid darkgray 3px;
+        }
+        section.multi-slide {
+            break-inside: auto;
+        }
+        a:link, a:visited {
+           color: inherit;
+           text-decoration: none;
+        }
+        a:link::after {
+            content: " (" attr(href) ")";
+        }
+        a.literal::after {
+            content: normal;
+        }
+        h2 br, h3 br {display: none;}
+        .control {display: none;}
+    </style>
+    <style media="screen">
+        body {
+            background-color: #446;
+            margin: 0; padding: 0;
+            font-family: Verdana, Tahoma, sans-serif;
+            scroll-snap-type: proximity;
+            scroll-snap-padding: 2vh 2vw;
+        }
+        header, section:not(.multi-slide), footer {
+            display: block;
+            box-sizing: border-box;
+            width: calc(96vw - 20px);
+            max-width: 36em;
+            min-height: 96vh;
+            padding: 1em;
+            border-radius: 1em;
+            margin: 2vh auto;
+            background-image: linear-gradient(to bottom right, lightYellow 20%, darkSeaGreen);
+            box-shadow: 0.2em 0.3em 0.5em 0 black;
+            scroll-snap-align: start;
+        }
+      section > *:only-child, h2 + p:last-child {
+        text-align: center;
+        font-style: italic;
+        line-height: 1.5;
+        padding-top: calc(50vh - 5em);
+        color: #113;
+        text-shadow: lemonChiffon 0 0 0.3em, white 0 0 0.4em;
+      }
+        ul, ol {
+            padding-left: 3em;
+        }
+        @media (min-height: 40em) {
+            /* TODO: Replace fixed heights with flex-box */
+            header, section:not(.multi-slide), footer {
+                height: 96vh;
+            } 
+            section > ul:nth-child(2), section > ol:nth-child(2), footer > ul:nth-child(2) {
+                height: calc(100% - 5em);
+                overflow: auto;
+            }
+            section > p + ul, section >  p + ol, footer > p + ul {
+                height: calc(100% - 10em);
+                overflow: auto;
+            }
+            header ul {
+                height: calc(100% - 10em);
+                overflow: auto;
+            }
+        }
+        @media (min-width: 30em) {
+            :root {
+                font-size: 150%;
+            }
+            li li {
+                font-size: 80%;
+            }
+        }
+        @media (min-width: 40em) AND (min-height: 40em) {
+            :root {
+                font-size: 200%;
+            }
+        }
+        .control {
+            display: block;
+            position: fixed;
+            background-color: rgba(100%, 100%, 75%, 0.5); 
+            font-size: 80%;
+            padding: 0.25em 0.5em;
+            bottom: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .control input[type="checkbox"] {
+            height: 1em;
+            width: 1em;
+            border-radius: 25%;
+            box-sizing: border-box;
+            font-size: inherit;
+        }
+        :not(a):focus {
+            outline: none;
+            border-right: solid seaGreen;
+        }
+        :link { color: #446;}
+    </style>
+    <style id="interactive-styles" disabled="disabled" media="only none">
+        section :focus ~ li, section :focus ~ ul, section :focus ~ ol, 
+        section .contains-focus ~ li, section .contains-focus ~ ul, section .contains-focus ~ ol {
+            opacity: 0.05;
+        }
+        section li ul, section li ol {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: opacity 0.5s;
+        }
+        li:focus ul, .contains-focus > ul,
+        li:focus ol, .contains-focus > ol {
+            height: auto;
+            opacity: 1;
+        }
+    </style>                
+</head>
+<body>
+    
+<header>
+<h1 id="style-substance">Style = Substance</h1>
+<p>Translating Good Design into Great Accessibility</p>
+<ul>
+  <li>
+    <p>Amelia Bellamy-Royds</p>
+    <ul>
+      <li>Author &amp; Web Standards Editor</li>
+      <li>W3C Invited Expert, SVG and ARIA working groups</li>
+      <li><a href="https://twitter.com/settings/account">@AmeliasBrain</a></li>
+      <li>amelia.bellamy.royds@gmail.com</li>
+    </ul>
+  </li>
+  <li>
+    <p>ID24 for Global Accessibility Awareness Day 2016</p>
+    <ul>
+      <li><a href="http://www.inclusivedesign24.org/">http://www.inclusivedesign24.org/</a></li>
+      <li>01:00 UTC, 19 May 2016</li>
+    </ul>
+  </li>
+</ul>
+</header>
+<section>
+<h2 id="bad-design-is-an-accessibility-problem">Bad Design is an Accessibility Problem</h2>
+<ul>
+  <li>Poor contrast</li>
+  <li>Indistinguishable colors</li>
+  <li>Illegible fonts</li>
+  <li>Unnecessary motion</li>
+  <li>Confusing interface patterns</li>
+</ul>
+</section>
+<section>
+<h2 id="i-m-not-here-to-talk-about-br-bad-design">I'm not here to talk about <br>Bad Design</h2>
+</section>
+<section>
+<h2 id="i-m-here-to-talk-about-br-good-design">I'm here to talk about <br>Good Design</h2>
+</section>
+<section>
+<h2 id="good-design-can-enhance-accessibility-br-_if_-br-the-style-is-translated-into-substance">Good Design Can Enhance Accessibility <br><em>if</em><br>the Style is translated into Substance</h2>
+</section>
+<section>
+<h2 id="what-is-style-">What is Style?</h2>
+<ul>
+  <li>Appearance</li>
+  <li>Fashion</li>
+  <li>Typography, color schemes, icons, layout, graphical effects, animation</li>
+  <li>Pretty much everything you control with CSS</li>
+</ul>
+</section>
+<section>
+<h2 id="what-is-substance-">What is Substance?</h2>
+<ul>
+  <li>Meaning</li>
+  <li>Function</li>
+  <li>Context</li>
+  <li>Connections</li>
+  <li>Pretty much everything you can specify in HTML (and ARIA)</li>
+  <li>AKA "Semantics"</li>
+</ul>
+</section>
+<section>
+<h2 id="accessibility-br-is-all-about-br-substance">Accessibility <br>is all about <br>Substance</h2>
+</section>
+<section>
+<h2 id="accessibility-br-tends-to-overlook-br-style">Accessibility <br>tends to overlook <br>Style</h2>
+</section>
+<section>
+<h2 id="making-the-connection">Making the Connection</h2>
+<ul>
+  <li>Many more visual designers than accessibility experts</li>
+  <li>Designers are experts in communicating semantics
+    <ul>
+      <li>Meaning</li>
+      <li>Function</li>
+      <li>Context</li>
+      <li>Connections</li>
+    </ul>
+  </li>
+  <li>Designers who can translate style into substance can help ensure that <em>all</em> users get the best experience</li>
+</ul>
+</section>
+<section>
+<h2 id="_some_-user-experience-br-br-sux"><em>Some</em> User Experience <br>=<br> SUX</h2>
+</section>
+<section>
+<h2 id="how-can-br-style-substance-br-">How Can <br>Style=Substance<br>?</h2>
+</section>
+<section>
+<h2 id="markup-is-for-computers">Markup is for Computers</h2>
+<ul>
+  <li>Most users never see your HTML tags</li>
+  <li>Most users don't know if it's <code>&lt;div&gt;</code> soup</li>
+  <li>So how do they understand the semantics?</li>
+</ul>
+</section>
+<section>
+<h2 id="style-is-for-most-people">Style is for (most) People</h2>
+<ul>
+  <li>Layout communicates structure</li>
+  <li>Shape, borders, &amp; shadows communicate function</li>
+  <li>Color and icons communicate state</li>
+  <li>Motion communicates relationships</li>
+</ul>
+</section>
+<section>
+<h2 id="visual-style-br-_represents_-br-substance-br-for-visual-users">Visual Style <br><em>Represents</em> <br> Substance <br> for Visual Users</h2>
+</section>
+<section>
+<h2 id="style-alone-is-unreliable">Style (Alone) is Unreliable</h2>
+<ul>
+  <li>Alternative color schemes</li>
+  <li>Plain text layouts</li>
+  <li>Screen readers</li>
+  <li>Keyboard control</li>
+  <li>Bad connection: no CSS/images</li>
+</ul>
+</section>
+<section>
+<h2 id="need-redundancy">Need Redundancy</h2>
+<ul>
+  <li>All information communicated via visual styles must also be expressed in markup
+    <ul>
+      <li>text content</li>
+      <li>semantic HTML tags</li>
+      <li>ARIA attributes</li>
+    </ul>
+  </li>
+  <li>It's not enough that code recreates a visual design</li>
+  <li>It needs to encode the <em>meaning</em> behind the design choices</li>
+  <li>Designers need to speak the language of HTML + ARIA</li>
+</ul>
+</section>
+<section>
+<h2 id="include-semantics-with-designs">Include Semantics with Designs</h2>
+<ul>
+  <li>Visual mock-ups sent to coders annotated using HTML/ARIA semantics</li>
+  <li>Pattern libraries using semantic markup</li>
+  <li>Maybe: use CSS tag/attribute selectors to enforce the connection</li>
+</ul>
+</section>
+<section>
+<h2 id="checklist">Checklist</h2>
+<p>Created an awesome style guide or pattern library?<br>Make sure it's implemented accessibly:</p>
+<ol>
+  <li>Complex layout → Reading Order</li>
+  <li>Page templates → Main elements</li>
+  <li>Components → Roles</li>
+  <li>Repeated components → Lists</li>
+  <li>Icons &amp; images → Alt text</li>
+  <li>Changeable components → States</li>
+  <li>Associated components → Relationships</li>
+  <li>Text styles → Semantic HTML</li>
+</ol>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="design-the-reading-order">Design the Reading Order</h2>
+  <p>Complex layout → Reading Order</p>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Screen readers can only read one thing at a time</li>
+  <li>Many other tools have limited layout options</li>
+  <li>Two-dimensional layout is reduced to a linear reading order</li>
+  <li>Keyboard tabindex moves focus to one element at a time</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Every page template needs a reading order for components
+    <ul>
+      <li><a href="images/Profilewireframe.png">Sample page wireframe image</a><br>→ <a href="https://commons.wikimedia.org/wiki/File:Profilewireframe.png">Credit: Rob Enslin via Flickr/Wikimedia Commons</a></li>
+    </ul>
+  </li>
+  <li>Complex components need internal reading order
+    <ul>
+      <li><a href="images/Profilewireframe-readingOrder-components.png">Fully annotated page template</a></li>
+    </ul>
+  </li>
+  <li>Page templates need order for components
+    <ul>
+      <li><a href="images/Profilewireframe-readingOrder-page.png">Fully annotated page template</a></li>
+      <li><a href="images/CBC-CategoryPage-2016-05-18-small.png">More realistic complex page</a><br>→ <a href="http://www.cbc.ca/news/technology">Source: CBC News Technology &amp; Science category page</a></li>
+    </ul>
+  </li>
+  <li>Especially important for interaction
+    <ul>
+      <li>Information before user input requests</li>
+      <li>Controls before controlled content</li>
+      <li>Options before submit buttons</li>
+      <li><a href="https://codepen.io/login">Even simple forms have complex reading order issues</a><br>→ <a href="https://codepen.io/login">Source: CodePen login page</a></li>
+    </ul>
+  </li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Make DOM order match reading order</li>
+  <li>For float-based layouts, use wrapper <code>&lt;div&gt;</code> elements instead of changing DOM order</li>
+  <li>Use same-page navigation links (and landmark roles) to allow jumping to content</li>
+  <li>If this is not enough, use <code>aria-flowto="next-element-id"</code> to change reading order</li>
+  <li>Use <code>aria-owns="virtual-child-elements"</code> to change the effective tree structure
+    <ul>
+      <li>Can create tree structures when elements can't have children, e.g. SVG</li>
+      <li><a href="images/MBostock-CirclePacking.svg">SVG shape elements can be DOM siblings but semantic containers</a><br>→ <a href="http://bl.ocks.org/mbostock/4063530">Source: Mike Bostock's D3 Circle Packing demo</a></li>
+    </ul>
+  </li>
+  <li>Remember: <code>aria-owns</code> and <code>aria-flowto</code> don't change tab order</li>
+</ul>
+</section>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="every-page-needs-a-main">Every Page Needs a Main</h2>
+  <p>Page templates → Main elements</p>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Allows screen reader users to skip to content</li>
+  <li>With <code>nav</code>, most important landmark element</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Find the unique content for this template
+    <ul>
+      <li><a href="images/CBC-ArticlePage-2016-05-18-small.png">single blog post</a><br>→ <a href="http://www.cbc.ca/news/technology/bob-mcdonald-search-for-habitable-planets-1.3579830">Source: CBC News article</a></li>
+      <li><a href="images/CBC-CategoryPage-2016-05-18-small.png">article list</a><br>→ <a href="http://www.cbc.ca/news/technology">Source: CBC News category page</a></li>
+      <li><a href="images/CBC-SearchPage-2016-05-18-small.png">search results</a><br>→ <a href="http://www.cbc.ca/gsa/?q=web+accessibility&amp;gns=SEARCH">Source: CBC News search page</a></li>
+    </ul>
+  </li>
+  <li>Why is someone at <em>this</em> URL and not any other?</li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>An HTML <code>&lt;main&gt;</code> element (preferred)</li>
+  <li>ARIA <code>role="main"</code> on a non-interactive element (e.g., <code>&lt;div&gt;</code>)</li>
+  <li>There is only one!</li>
+</ul>
+</section>
+</section>
+<section>
+<h2 id="extra-credit-add-more-landmarks">Extra credit: Add more landmarks</h2>
+<ul>
+  <li>Once you've identified the <code>&lt;main&gt;</code>, what's left?</li>
+  <li>The remaining content should also be grouped into <a href="https://www.w3.org/TR/wai-aria-1.1/#landmark_roles">landmark roles</a></li>
+  <li>Web site header
+    <ul>
+      <li><code>role="banner"</code> </li>
+      <li><code>&lt;header&gt;</code> outside <code>&lt;main&gt;</code> or <code>&lt;article&gt;</code></li>
+    </ul>
+  </li>
+  <li>Web site footer
+    <ul>
+      <li><code>role="contentinfo"</code> </li>
+      <li><code>&lt;footer&gt;</code> outside <code>&lt;main&gt;</code> or <code>&lt;article&gt;</code></li>
+    </ul>
+  </li>
+  <li>Site navigation
+    <ul>
+      <li><code>&lt;nav&gt;</code> </li>
+      <li><code>role="navigation"</code></li>
+      <li>if more than 1 per page, give it a meaningful name with <code>aria-label</code></li>
+    </ul>
+  </li>
+  <li>Site search (if not the main content of this page)
+    <ul>
+      <li><code>role="search"</code> on a <code>&lt;form&gt;</code></li>
+    </ul>
+  </li>
+  <li>Sidebars &amp; other modules
+    <ul>
+      <li><code>&lt;aside&gt;</code>, <code>role="complementary"</code> or <code>role="region"</code></li>
+      <li>e.g., top headlines, weather report, twitter feed</li>
+      <li>give it a meaningful name with <code>aria-label</code></li>
+    </ul>
+  </li>
+</ul>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="every-component-needs-a-role">Every Component Needs a Role</h2>
+<p>Components → Roles</p>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Non-visual users can't see your styles</li>
+  <li>If it's important enough to style, it has a role in your website</li>
+  <li>Roles give context &amp; explain functionality</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Anything interactive
+    <ul>
+      <li><a href="images/LonelyPlanet-socialButtons.png">buttons &amp; links</a></li>
+      <li><a href="images/LonelyPlanet-dropdown.png">form elements</a></li>
+      <li><a href="images/LonelyPlanet-alert.png">alerts &amp; dialogs</a></li>
+      <li><a href="images/LonelyPlanet-imageSlider.png">image carousels</a></li>
+      <li><a href="images/LonelyPlanet-tooltip.png">tooltips</a></li>
+      <li><a href="images/LonelyPlanet-breadcrumbs.png">breadcrumb links</a></li>
+      <li><a href="images/LonelyPlanet-pagination.png">pagination links</a><br>→ <a href="http://rizzo.lonelyplanet.com/styleguide/ui-components">Source: Lonely Planet Style Guide</a></li>
+    </ul>
+  </li>
+  <li>Any composite item that forms a meaningful unit
+    <ul>
+      <li><a href="images/CodePen-form.png">forms</a></li>
+      <li><a href="images/CodePen-dialogs.png">dialogs</a></li>
+      <li><a href="images/CodePen-blogPostCard.png">cards</a></li>
+      <li><a href="images/CodePen-blogPostBlock.png">collections of cards</a><br>→ <a href="http://codepen.io/guide/">Source: CodePen Design Patterns and Style Guide</a></li>
+    </ul>
+  </li>
+  <li>Pretty much anything in your pattern library
+    <ul>
+      <li><a href="http://styleguides.io/examples.html">More pattern libraries &amp; style guides</a></li>
+    </ul>
+  </li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Use HTML elements with native roles</li>
+  <li>Use the ARIA <code>role</code> attribute</li>
+  <li>Don't add non-interactive roles to interactive elements!</li>
+  <li>Be careful adding or changing interactive roles
+    <ul>
+      <li>must re-create usual keyboard interactions with script</li>
+      <li>use JS to add roles that require JS</li>
+    </ul>
+  </li>
+</ul>
+</section>
+</section>
+<section>
+<h2 id="extra-credit-give-them-names-">Extra credit: Give them names!</h2>
+<ul>
+  <li>A role is only halfway to accessibility</li>
+  <li>Most roles require author-provided names</li>
+  <li>Use native HTML naming mechanisms for native HTML elements
+    <ul>
+      <li><code>&lt;caption&gt;</code>, <code>&lt;figcaption&gt;</code>, <code>&lt;label&gt;</code></li>
+      <li>Note <code>&lt;label&gt;</code> only works on <a href="https://www.w3.org/TR/html51/sec-forms.html#labelable-element">labelable elements</a></li>
+    </ul>
+  </li>
+  <li>Use <code>aria-labelledby="other-element-id"</code> for other labelling elements</li>
+  <li>Use <code>aria-label="name"</code> if there's no visible label</li>
+</ul>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="a-set-of-components-is-a-list">A Set of Components is a List</h2>
+<p>Repeated components → Lists</p>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Non-visual users can't see at a glance how many repeats there are</li>
+  <li>Screen readers announce # of elements in a list</li>
+  <li>Each item is announced with name of list &amp; </li>
+  <li>Can optionally provide fallback list styles if CSS fails</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Any repeated unit with more than ~3 repeats
+    <ul>
+      <li>search results</li>
+      <li>product listings</li>
+      <li>article archives</li>
+      <li>comments</li>
+    </ul>
+  </li>
+  <li>May be called cards, tiles, panels, items, grids, feed</li>
+  <li><em>Not</em> sections &amp; headings that make up an organized outline of continuous text</li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Wrap list in <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> and items in <code>&lt;li&gt;</code>
+    <ul>
+      <li>fallback will be list styles</li>
+    </ul>
+  </li>
+  <li>Wrap list in <code>&lt;div role="list"&gt;</code> and items in <code>&lt;div role="listitem"&gt;</code>
+    <ul>
+      <li>fallback will be block layout</li>
+    </ul>
+  </li>
+  <li><em>May</em> group list items with <code>&lt;div role="group"&gt;</code> (ARIA lists only)
+    <ul>
+      <li>Groups can only contain list items</li>
+      <li>Often easier to have nested lists or a heading-based outline with multiple short lists</li>
+    </ul>
+  </li>
+  <li>No other markup between list element and list item element
+    <ul>
+      <li>If other wrappers required for layout, use <code>role="presentation"</code> on the wrapper elements</li>
+    </ul>
+  </li>
+  <li>Giving the list element a short name helps (not required)</li>
+  <li>Avoid re-purposing semantic elements &amp; never re-purpose interactive elements
+    <ul>
+      <li>use <code>&lt;li&gt;&lt;a&gt;...&lt;/a&gt;&lt;/li&gt;</code></li>
+      <li>not <code>&lt;a role="listitem"&gt;...&lt;/a&gt;</code></li>
+      <li>Elements can only have one role at a time!</li>
+    </ul>
+  </li>
+</ul>
+</section>
+</section>
+<section>
+<h2 id="extra-credit-number-partial-lists">Extra credit: Number Partial Lists</h2>
+<ul>
+  <li>If content of current page is only part of the list, need extra work</li>
+  <li>For paged lists, use <code>aria-setsize</code> and <code>aria-posinset</code>
+    <ul>
+      <li>Both specified on <em>each</em> <code>listitem</code> or <code>&lt;li&gt;</code></li>
+      <li><code>aria-posinset</code> starts at 1</li>
+      <li>Yes, set size will be the same for all. Still need to repeat it.</li>
+    </ul>
+  </li>
+  <li>If total set size is unknown, use <code>aria-setsize="-1"</code></li>
+  <li><em>Only</em> use set attributes when list in DOM is incomplete
+    <ul>
+      <li>browser can calculate them for most lists</li>
+      <li>don't risk messing it up</li>
+    </ul>
+  </li>
+  <li>For continuous feed (unknown set size, new entries at either end) use new roles <code>feed</code> instead of <code>list</code> and <code>article</code> instead of <code>listitem</code></li>
+</ul>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="every-image-needs-some-text">Every Image Needs Some Text</h2>
+  <p>Icons &amp; images → Alt text</p>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Provides meaning to screen reader users</li>
+  <li>Provides fallback to other users</li>
+  <li>If the icon has a meaning, name it!</li>
+  <li>If the image provides context, describe it!</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Icons in buttons, badges, links, and more</li>
+  <li>Any other image (including stock photos &amp; background images)
+    <ul>
+      <li>Many images are "decorative" but still convey meaning</li>
+      <li><a href="http://tink.uk/text-descriptions-emotion-rich-images/">Léonie Watson calls these "emotion rich images"</a></li>
+    </ul>
+  </li>
+  <li>Only exception is images used as borders, spacers, etc.
+    <ul>
+      <li>meaning of these should be conveyed by the roles on content elements</li>
+    </ul>
+  </li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>For <code>&lt;img&gt;</code> icons, use <code>alt</code> to name function</li>
+  <li>For other <code>&lt;img&gt;</code>, use <code>alt</code> to describe content
+    <ul>
+      <li>If complex, use <code>aria-describedby</code> to point to longer description on the same page</li>
+    </ul>
+  </li>
+  <li>For SVG inline or as <code>&lt;object&gt;</code>, use <code>&lt;title&gt;</code> and <code>aria-labelledby</code></li>
+  <li>For images embedded using CSS, use <code>role="img"</code> and <code>aria-labelledby</code>
+    <ul>
+      <li>or upgrade to responsive <code>&lt;img&gt;</code> with srcset</li>
+    </ul>
+  </li>
+  <li>For icon fonts, use <a href="http://thenewcode.com/620/Why-You-Should-Consider-A-Ligature-Icon-Font-For-Your-Next-Project">font ligatures</a>
+    <ul>
+      <li>provides fallback if font doesn't load</li>
+      <li>if not possible, use text in HTML clipped with CSS</li>
+    </ul>
+  </li>
+  <li>For localized content, ensure alt text is translated!</li>
+  <li>For user-uploaded images, prompt user to supply alt text</li>
+  <li>If no user text, generate something meaningful with information you have
+    <ul>
+      <li>"PNG image uploaded by user AmeliaBR on 19 May 2016"</li>
+      <li>"photo taken on 17 May 2016 in Edmonton, Canada"</li>
+    </ul>
+  </li>
+  <li>Don't use <code>alt=""</code> for missing description!</li>
+</ul>
+</section>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="communicate-the-current-state">Communicate the Current State</h2>
+<ul>
+  <li>Changeable components → States</li>
+</ul>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Often need to know the state of a widget to know what will happen if you use it</li>
+  <li>If you're designing different visual states, make sure they are reflected with accessible markup!</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Any element that can change appearance based on current status</li>
+  <li>Form elements with valid/invalid or enabled/disabled states</li>
+  <li>On/off switches</li>
+  <li>Toggle buttons (e.g., follow/unfollow buttons)</li>
+  <li>Tab and accordion headings</li>
+  <li>Drag &amp; drop items</li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Complex / custom code will require complex / custom ARIA</li>
+  <li>Use native HTML elements whenever possible
+    <ul>
+      <li>be careful of checkbox hacks for non-checkboxes!</li>
+    </ul>
+  </li>
+  <li>Use state attributes for custom toggle-able widgets
+    <ul>
+      <li>check-boxes use <code>aria-checked</code> (but just use a real checkbox)</li>
+      <li>switches &amp; radio button also use <code>aria-checked</code></li>
+      <li>selection lists use <code>aria-selected</code> or <code>aria-checked</code></li>
+      <li>toggle buttons are a button with an <code>aria-pressed</code> attribute</li>
+      <li>tabs &amp; accordions use <code>aria-expanded</code> on the <em>clickable</em> element</li>
+    </ul>
+  </li>
+  <li>Use <code>aria-disabled</code> and <code>aria-invalid</code> for custom form elements
+    <ul>
+      <li><code>aria-errormessage="message-id"</code> points to an error that is displayed when <code>aria-invalid="true"</code></li>
+    </ul>
+  </li>
+  <li>Use <a href="https://www.w3.org/TR/wai-aria-1.1/#attrs_dragdrop">drag and drop attributes</a> when appropriate
+    <ul>
+      <li>also include buttons/forms to make the same changes</li>
+    </ul>
+  </li>
+</ul>
+</section>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="connect-cause-and-effect">Connect Cause and Effect</h2>
+<ul>
+  <li>Associated components → Relationships</li>
+</ul>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Many users only experience a small part of the page at a time</li>
+  <li>When something changes, they need to know what &amp; where</li>
+  <li>Relationships implied by colors and layout need to be made explicit</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Any part of the site where user interaction causes a change elsewhere on the page
+    <ul>
+      <li>tabs, accordions, and other expandable text</li>
+      <li>carousels and slide shows</li>
+      <li>tool tips and pop-ups</li>
+      <li>custom audio-video controls</li>
+    </ul>
+  </li>
+  <li>Any elements which add context to other elements</li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Use <code>aria-controls="other-element-id"</code> when an action on this element changes another part of page
+    <ul>
+      <li>In some cases, can use HTML <code>&lt;output&gt;</code></li>
+    </ul>
+  </li>
+  <li>Use <code>aria-describedby="other-element-id"</code> when another element provides information to explain this one
+    <ul>
+      <li>In addition to <code>&lt;label&gt;</code> or <code>aria-labelledby</code> for the main label</li>
+      <li>In addition to a good reading order</li>
+    </ul>
+  </li>
+</ul>
+</section>
+</section>
+<section>
+<h2 id="extra-credit-warning-about-changes">Extra credit: Warning about changes</h2>
+<ul>
+  <li>Anything that is loading or part-way through a change needs <code>aria-busy="true"</code>
+    <ul>
+      <li>especially important for feeds, etc., where current position could get lost</li>
+    </ul>
+  </li>
+  <li>Content that might change <em>without</em> user action is "live"</li>
+  <li>If changes are important updates, use <code>aria-live="polite"</code></li>
+  <li>If changes are urgent alerts, use <code>aria-live="assertive"</code></li>
+  <li>If changes don't affect user, use <code>aria-live="off"</code></li>
+  <li>Some roles are live regions by default:
+    <ul>
+      <li><code>alert</code> for warnings &amp; alerts (assertive by default)</li>
+      <li><code>status</code> and <code>log</code> for less urgent updates</li>
+      <li><code>marquee</code> for news headlines and stock tickers--even if they don't scroll! (updates off by default)</li>
+      <li><code>timer</code></li>
+    </ul>
+  </li>
+  <li>See also <code>aria-atomic</code> and <code>aria-relevant</code></li>
+</ul>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="styled-text-has-a-purpose">Styled Text has a Purpose</h2>
+<ul>
+  <li>Text styles → Semantic HTML</li>
+</ul>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>Because it makes your code more readable</li>
+  <li>Helps enforce a 1-to-1 relationship between style and meaning</li>
+  <li><em>May</em> be used by some assistive technologies (e.g., Braille)</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Any content that has a distinct formatting</li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Ask <em>why</em> is this element formatted differently?</li>
+  <li>Find an HTML element that matches the meaning</li>
+  <li><a href="https://www.w3.org/TR/html51/fullindex.html#index-elements">There are <em>a lot</em> of HTML elements for text styling!</a>
+    <ul>
+      <li><code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> for emphasis</li>
+      <li><code>&lt;dfn&gt;</code> for a new term being defined</li>
+      <li><code>&lt;b&gt;</code> for other called-out terms or names</li>
+      <li><code>&lt;i&gt;</code> for poetry or foreign language content</li>
+      <li><code>&lt;mark&gt;</code> for highlighted text and pull-quotes</li>
+      <li><code>&lt;small&gt;</code> for fine print</li>
+      <li><code>&lt;ins&gt;</code> and <code>&lt;del&gt;</code> for edits</li>
+      <li><code>&lt;code&gt;</code>, <code>&lt;kbd&gt;</code>, <code>&lt;var&gt;</code>, and <code>&lt;samp&gt;</code> for code</li>
+      <li><code>&lt;time&gt;</code> for dates &amp; times (with machine-readable version in <code>datetime</code> attribute)</li>
+    </ul>
+  </li>
+  <li>It's okay to override default formatting for an element</li>
+  <li>But respect user expectations
+    <ul>
+      <li>links should look like links, other things shouldn't</li>
+      <li>pull quotes are not block quotes</li>
+      <li>color is not enough to distinguish deletions</li>
+    </ul>
+  </li>
+  <li>These elements are not communicated well by screen readers: make sure text can stand on its own!</li>
+</ul>
+</section>
+</section>
+<section>
+<h2 id="extra-credit-language-tags">Extra credit: Language tags</h2>
+<ul>
+  <li>Use the <code>lang</code> attribute on your root element and again on any content in another language.</li>
+  <li>Screen readers need to know what language they're reading!</li>
+  <li>Translation services work better if they're not guessing!</li>
+  <li>Some CSS (hyphenation, text transform, quotation marks) is language sensitive.</li>
+  <li>Some languages affect glyph selection from a font.</li>
+</ul>
+</section>
+<section class="multi-slide">
+<section>
+<h2 id="final-check-br-avoid-div-and-span-">Final Check:<br> Avoid <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code></h2>
+</section>
+<section>
+<h3 id="why-">Why?</h3>
+<ul>
+  <li>No meaning without role</li>
+  <li>Why would you define styles for content without meaning?</li>
+</ul>
+</section>
+<section>
+<h3 id="what-">What?</h3>
+<ul>
+  <li>Consider this a double-check</li>
+  <li>If you've checked everything else, your final code should have very few <code>&lt;div&gt;</code> and hardly any <code>&lt;span&gt;</code></li>
+</ul>
+</section>
+<section>
+<h3 id="how-">How?</h3>
+<ul>
+  <li>Use <code>&lt;div&gt;</code> (without <code>role</code>) only for CSS hacks &amp; JS hooks
+    <ul>
+      <li>wrapper for float-based layout</li>
+      <li>placeholder for content that may be injected with script</li>
+    </ul>
+  </li>
+  <li>Use <code>&lt;span&gt;</code> only if no other HTML element suits
+    <ul>
+      <li>Or if you need non-meaningful child elements, e.g., fun styles that change on each letter</li>
+    </ul>
+  </li>
+</ul>
+</section>
+</section>
+<section>
+<h2 id="good-semantics-don-t-fix-bad-design-">Good Semantics Don't Fix Bad Design!</h2>
+<ul>
+  <li>ARIA &amp; HTML semantics help screen readers &amp; some other tools</li>
+  <li>HTML semantics also help keyboard users</li>
+  <li>Don't help color blindness or many low vision users
+    <ul>
+      <li>Still need good color contrast</li>
+      <li>Still need user-friendly font sizes</li>
+    </ul>
+  </li>
+  <li>Don't help new users, language learners, or people with alternative cognitive processing
+    <ul>
+      <li>Still need logical layout with clear flow</li>
+      <li>Still need visible labels for icons &amp; widgets</li>
+      <li>Still need understandable text copy</li>
+    </ul>
+  </li>
+</ul>
+</section>
+<section>
+<h2 id="good-semantics-ensure-br-_everyone_-br-appreciates-your-good-design">Good Semantics ensure <br><em>Everyone</em><br> Appreciates your Good Design</h2>
+</section>
+<footer>
+<h2 id="about-me">About Me</h2>
+<ul>
+  <li>
+    <p>Amelia Bellamy-Royds</p>
+    <ul>
+      <li>Author &amp; Web Standards Editor</li>
+      <li>W3C Invited Expert, SVG and ARIA working groups</li>
+      <li><a href="http://www.oreilly.com/pub/au/6190">Books on SVG from O'Reilly Media</a></li>
+      <li><a href="https://twitter.com/settings/account">@AmeliasBrain</a></li>
+      <li><a href="mailto:amelia.bellamy.royds@gmail.com">amelia.bellamy.royds@gmail.com</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Find these slides</p>
+    <ul>
+      <li><a href="https://AmeliaBR.GitHub.IO/style-is-substance">AmeliaBR.GitHub.IO/style-is-substance</a></li>
+    </ul>
+  </li>
+</ul>
+</footer>
+    <script>
+(function(){
+    var initialized = false;  
+    var interactiveStyles = document.getElementById("interactive-styles");
+    var headingSelector = "h1, h2, h3", 
+        pointsSelector = "section > ul > li, section > ol > li, footer > ul > li";
+    
+    var toggleLabel = document.createElement("label");
+    toggleLabel.setAttribute("class", "control");
+    document.body.id ="body";
+    toggleLabel.setAttribute("aria-controls", "body");
+    toggleLabel.textContent = "Tab to reveal";
+    
+    var toggle = document.createElement("input");
+    toggle.setAttribute("type", "checkbox");
+    toggle.addEventListener("change", toggleTabControl);
+    toggleLabel.insertBefore(toggle, null);
+    
+    document.body.insertBefore(toggleLabel, document.body.firstChild);
+    
+    function addTabIndex(selector) {
+        var points = document.querySelectorAll(selector);
+        for (var i=0, n=points.length; i<n; i++) {
+            points[i].setAttribute("tabIndex", 0);
+        }
+        return points;
+    }
+    function removeTabIndex(selector) {        
+        var points = document.querySelectorAll(selector);
+        for (var i=0, n=points.length; i<n; i++) {
+            points[i].removeAttribute("tabIndex");
+        }
+        return points;
+    }
+    
+    //add tabIndex to headings
+    //scroll slide into place whenever heading gets focus
+    var headings = addTabIndex(headingSelector);
+    for (var i=0, n=headings.length; i<n; i++){
+        headings[i].addEventListener("focus", scrollSlide);
+    }
+    
+    function toggleTabControl(e){
+        
+        if (!e.target.checked){
+            interactiveStyles.setAttribute("disabled", "disabled");
+            interactiveStyles.setAttribute("media", "only none"); 
+                //because "disabled" doesn't work!
+            document.body.insertBefore(interactiveStyles, null); //force refresh
+            
+            //remove tabIndex from points
+            removeTabIndex(pointsSelector);
+            return;
+        }
+        
+        //add tabIndex to bullet points
+        addTabIndex(pointsSelector);
+        
+        if (!initialized) {
+
+            //ensure that focusing links doesn't mess up focus styles
+            var links = document.getElementsByTagName("a");
+            for (var i=0, n=links.length; i<n; i++) {
+                links[i].addEventListener("focus", focusIn);
+                links[i].addEventListener("blur", focusOut);
+            }
+            initialized = true;
+        }
+        
+        interactiveStyles.removeAttribute("disabled");
+        interactiveStyles.setAttribute("media", "screen");
+        document.body.insertBefore(interactiveStyles, null); //force refresh
+    }
+    function focusIn(e){
+        var p = e.target.parentElement;
+        while ((p.tagName.toLowerCase() != "section") && 
+               (p != document.documentElement)) {
+            p.classList.add("contains-focus");
+            p = p.parentElement;
+        }
+    }
+    function focusOut(e){
+        var p = e.target.parentElement;
+        while ((p.tagName.toLowerCase() != "section") && 
+               (p != document.documentElement)) {
+            p.classList.remove("contains-focus");
+            p = p.parentElement;
+        }
+    }
+    function scrollSlide(e){
+        scrollTo(window.scrollX, e.target.parentElement.offsetTop - 10);
+    }
+})();
+    </script>
+</body></html>
